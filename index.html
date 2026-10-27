@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f7ff">
+  <title>SentimentAI — Phân tích cảm xúc</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="#" aria-label="SentimentAI trang chủ">
+      <span class="brand-mark">🙂</span>
+      <span><strong>SentimentAI</strong><small>Phân tích cảm xúc đánh giá<br>sản phẩm thương mại điện tử</small></span>
+    </a>
+    <nav class="main-nav" aria-label="Điều hướng chính">
+      <a class="nav-link active" href="#overview"><span>⌂</span>Tổng quan</a>
+      <a class="nav-link" href="#comments"><span>▰</span>Phân tích bình luận <span class="nav-caret">⌄</span></a>
+      <a class="nav-link" href="#data-tools"><span>▦</span>Dữ liệu &amp; Tiền xử lý</a>
+      <a class="nav-link" href="#models"><span>♙</span>Mô hình phân tích</a>
+      <a class="nav-link" href="#report"><span>▥</span>Thống kê &amp; Báo cáo</a>
+      <a class="nav-link" href="#settings"><span>⚙</span>Cài đặt</a>
+    </nav>
+    <div class="sidebar-note">
+      <strong>Thông tin dự án</strong>
+      <p>Ứng dụng phân tích cảm xúc đánh giá sản phẩm thương mại điện tử sử dụng AI.</p>
+      <span>❤️ Made with Python &amp; Love</span>
+    </div>
+  </aside>
+
+  <main class="main-content" id="overview">
+    <header class="topbar">
+      <div class="breadcrumb">Không gian làm việc <span>/</span> Tổng quan</div>
+      <div class="top-actions">
+        <button class="icon-button" id="theme-toggle" aria-label="Đổi giao diện" title="Đổi giao diện">☼</button>
+        <button class="notification-button" id="notification-button" aria-label="Thông báo" title="Bạn đã cập nhật dữ liệu mới nhất">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg>
+          <i></i>
+        </button>
+        <div class="profile-wrap">
+          <button class="profile-button" id="profile-button" aria-expanded="false" aria-controls="profile-menu"><span class="avatar">SV</span><span class="profile-copy"><strong>Sinh viên</strong><small>Quản trị viên</small></span><span class="profile-caret">⌄</span></button>
+          <div class="profile-menu" id="profile-menu" hidden><strong>Xin chào!</strong><span>Bạn đang sử dụng bản demo SentimentAI.</span></div>
+        </div>
+      </div>
+    </header>
+
+    <div class="page-heading">
+      <div><span class="page-kicker">WORKSPACE / OVERVIEW</span><h2>Tổng quan</h2><p>Theo dõi và thấu hiểu khách hàng qua từng đánh giá.</p></div>
+      <div class="live-status" id="system-status"><span></span><div><strong id="system-status-label">Đang kiểm tra hệ thống</strong><small id="current-date">Dữ liệu cập nhật hôm nay</small></div></div>
+    </div>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="hero-icon">🛒</div>
+        <div>
+          <p class="eyebrow">PHÂN TÍCH TỰ ĐỘNG</p>
+          <h1>Phân tích cảm xúc đánh giá sản phẩm<br class="desktop-break"> thương mại điện tử</h1>
+          <p class="hero-description">Tổng hợp phản hồi khách hàng bằng bộ quy tắc từ khóa chạy cục bộ<br class="desktop-break"> để hỗ trợ ra quyết định tốt hơn.</p>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <span class="floating-face face-happy">●</span><span class="floating-face face-meh">●</span><span class="floating-face face-sad">●</span>
+        <div class="art-screen"><span>★★★★★</span><b>Đánh giá sản phẩm</b></div>
+        <span class="art-leaf leaf-one">❧</span><span class="art-leaf leaf-two">❧</span>
+      </div>
+    </section>
+
+    <section class="metric-grid" aria-label="Chỉ số tổng quan từ lịch sử phân tích">
+      <article class="metric-card blue-card"><div class="metric-icon">▤</div><div><span class="metric-label">Đánh giá đã phân tích</span><strong id="total-count">0</strong><small id="total-caption">Trong lịch sử trên thiết bị</small></div></article>
+      <article class="metric-card green-card"><div class="metric-icon">☻</div><div><span class="metric-label">Tích cực</span><strong id="positive-percent">0%</strong><small id="positive-count">0 đánh giá</small></div></article>
+      <article class="metric-card yellow-card"><div class="metric-icon">◉</div><div><span class="metric-label">Trung lập</span><strong id="neutral-percent">0%</strong><small id="neutral-count">0 đánh giá</small></div></article>
+      <article class="metric-card red-card"><div class="metric-icon">☹</div><div><span class="metric-label">Tiêu cực</span><strong id="negative-percent">0%</strong><small id="negative-count">0 đánh giá</small></div></article>
+    </section>
+
+    <section class="dashboard-grid" id="charts" aria-label="Thống kê phân tích">
+      <article class="panel rating-panel">
+        <h2><span class="panel-icon orange">◉</span>Kết quả theo cảm xúc</h2>
+        <div class="bar-chart rating-chart">
+          <div class="y-labels"><span id="chart-max">0</span><span></span><span></span><span></span><span>0</span></div>
+          <div class="bar-area">
+            <div class="bar-column"><b id="positive-bar-value">0</b><div class="bar green-bar" id="positive-bar" style="--height:0%"></div><span>Tích cực</span></div>
+            <div class="bar-column"><b id="neutral-bar-value">0</b><div class="bar yellow-bar" id="neutral-bar" style="--height:0%"></div><span>Trung lập</span></div>
+            <div class="bar-column"><b id="negative-bar-value">0</b><div class="bar red-bar" id="negative-bar" style="--height:0%"></div><span>Tiêu cực</span></div>
+          </div>
+        </div>
+      </article>
+      <article class="panel sentiment-panel">
+        <h2><span class="panel-icon purple">✣</span>Độ dài trung bình</h2>
+        <div class="legend"><span><i class="dot green-dot"></i>Tích cực</span><span><i class="dot yellow-dot"></i>Trung lập</span><span><i class="dot red-dot"></i>Tiêu cực</span></div>
+        <div class="bar-chart sentiment-chart">
+          <div class="y-labels"><span>200</span><span>150</span><span>100</span><span>50</span><span>0</span></div>
+          <div class="bar-area">
+            <div class="bar-column"><b id="positive-words-value">0</b><div class="bar green-bar" id="positive-words-bar" style="--height:0%"></div><span>Tích cực</span></div>
+            <div class="bar-column"><b id="neutral-words-value">0</b><div class="bar yellow-bar" id="neutral-words-bar" style="--height:0%"></div><span>Trung lập</span></div>
+            <div class="bar-column"><b id="negative-words-value">0</b><div class="bar red-bar" id="negative-words-bar" style="--height:0%"></div><span>Tiêu cực</span></div>
+          </div>
+        </div>
+        <p class="chart-footnote">Số từ trung bình</p>
+      </article>
+      <article class="panel keywords-panel">
+        <h2><span class="panel-icon purple">◉</span>Từ khóa nổi bật</h2>
+        <div class="keyword-columns">
+          <div class="keyword-box positive-keywords"><h3>Đánh giá tích cực</h3><div class="keyword-row"><span>Đã phân tích</span><b id="positive-keyword-count">0</b><i id="positive-keyword-bar" style="--width:0%"></i></div><p class="keyword-note">Các kết quả được tổng hợp từ lịch sử phân tích của bạn.</p></div>
+          <div class="keyword-box negative-keywords"><h3>Đánh giá cần lưu ý</h3><div class="keyword-row"><span>Đã phân tích</span><b id="negative-keyword-count">0</b><i id="negative-keyword-bar" style="--width:0%"></i></div><p class="keyword-note">Nhập thêm đánh giá để theo dõi xu hướng.</p></div>
+        </div>
+      </article>
+      <article class="panel model-panel" id="models">
+        <h2><span class="panel-icon purple">♟</span>Phương pháp phân tích</h2>
+        <div class="info-card"><strong>Bộ quy tắc từ khóa chạy cục bộ</strong><p>Nhận diện cụm từ tích cực, tiêu cực và một số trường hợp phủ định bằng tiếng Việt và tiếng Anh. Không gửi nội dung tới dịch vụ bên ngoài.</p><span class="info-badge">Không cần huấn luyện mô hình</span></div>
+      </article>
+      <article class="panel matrix-panel">
+        <h2><span class="panel-icon purple">✥</span>Tiền xử lý dữ liệu</h2>
+        <div class="info-card"><strong>Nhập tệp CSV để phân tích hàng loạt</strong><p>Chọn tệp có cột bình luận/đánh giá. Hệ thống bỏ dòng trống, kiểm tra giới hạn và lưu kết quả vào lịch sử trên thiết bị.</p><span class="info-badge">Tối đa 500 đánh giá mỗi lần</span></div>
+      </article>
+      <article class="panel donut-panel">
+        <h2><span class="panel-icon purple">◉</span>Phân bố cảm xúc</h2>
+        <div class="donut-layout"><div class="donut"><div><strong id="donut-total">0</strong><span>bình luận</span></div></div><div class="donut-legend"><p><i class="dot green-dot"></i>Tích cực <b id="donut-positive">0% (0)</b></p><p><i class="dot yellow-dot"></i>Trung lập <b id="donut-neutral">0% (0)</b></p><p><i class="dot red-dot"></i>Tiêu cực <b id="donut-negative">0% (0)</b></p></div></div>
+      </article>
+    </section>
+
+    <section class="panel data-tools" id="data-tools">
+      <div><h2><span class="panel-icon purple">▦</span>Nhập dữ liệu đánh giá</h2><p class="section-subtitle">Tải CSV lên để phân tích tối đa 500 bình luận cùng lúc. Cột nội dung sẽ được nhận diện tự động.</p></div>
+      <div class="import-controls"><label class="file-picker">Chọn tệp CSV<input id="csv-file" type="file" accept=".csv,text/csv"></label><span id="file-name">Chưa chọn tệp</span><button class="analyze-button" id="import-button" type="button" disabled>Phân tích tệp</button></div>
+      <p class="form-error" id="import-error" role="alert"></p>
+    </section>
+
+    <section class="bottom-grid" id="comments">
+      <article class="panel analysis-panel">
+        <h2><span class="panel-icon purple">◉</span>Phân loại cảm xúc bình luận</h2>
+        <p class="section-subtitle">Nhập bình luận để phân tích cảm xúc bằng bộ quy tắc cục bộ</p>
+        <div class="sample-prompts" aria-label="Ví dụ bình luận">
+          <span>Thử nhanh:</span>
+          <button type="button" class="sample-chip" data-sample="Sản phẩm rất đẹp, giao hàng nhanh và đóng gói cẩn thận.">Đánh giá tốt</button>
+          <button type="button" class="sample-chip" data-sample="Sản phẩm bị lỗi, chất lượng kém và giao hàng rất chậm.">Đánh giá chưa tốt</button>
+        </div>
+        <form id="analysis-form">
+          <label class="sr-only" for="review-text">Nội dung đánh giá</label>
+          <textarea id="review-text" maxlength="20000" placeholder="Ví dụ: Sản phẩm rất đẹp, giao hàng nhanh, đóng gói cẩn thận..."></textarea>
+          <div class="form-actions"><label for="language-select">✣ &nbsp;Ngôn ngữ:</label><select id="language-select"><option value="vi">Tiếng Việt</option><option value="en">English</option></select><span class="character-count"><span id="character-count">0</span> / 20.000 ký tự</span><button class="analyze-button" type="submit"><span>➤</span> Phân tích</button></div>
+          <p class="form-error" id="form-error" role="alert"></p>
+        </form>
+      </article>
+      <article class="panel result-panel" aria-live="polite">
+        <h2><span class="panel-icon green">▦</span>Kết quả phân tích</h2>
+        <div class="result-content" id="result-content">
+          <div class="result-heading"><span class="result-face" id="result-face">•</span><strong id="result-label">Chưa có kết quả</strong><span class="confidence" id="confidence">Độ tin cậy: —</span></div>
+          <blockquote id="result-quote">Kết quả phân tích sẽ hiển thị tại đây sau khi bạn gửi bình luận.</blockquote>
+          <div class="confidence-bar"><i id="confidence-bar" style="width:0%"></i></div>
+          <p class="confidence-caption"><span id="confidence-number">—</span></p>
+        </div>
+        <p class="disclaimer">Kết quả dựa trên bộ quy tắc từ khóa, có thể chưa nhận diện đầy đủ ngữ cảnh.</p>
+      </article>
+    </section>
+    <section class="panel history-panel" id="report" aria-labelledby="history-title">
+      <div class="history-header">
+        <div><h2 id="history-title"><span class="panel-icon purple">◷</span>Lịch sử phân tích</h2><p>Các bình luận bạn đã phân tích gần đây sẽ được lưu trên thiết bị này.</p></div>
+        <div class="history-actions"><button class="export-history" id="export-history" type="button" hidden>Xuất CSV</button><button class="clear-history" id="clear-history" type="button" hidden>Xóa lịch sử</button></div>
+      </div>
+      <div class="history-list" id="history-list"><div class="history-empty"><span>◷</span><strong>Chưa có phân tích nào</strong><small>Hãy thử nhập một bình luận ở khung phân tích phía trên.</small></div></div>
+    </section>
+    <section class="panel settings-panel" id="settings">
+      <h2><span class="panel-icon purple">⚙</span>Cài đặt &amp; quyền riêng tư</h2>
+      <p>Giao diện và lịch sử được lưu trong trình duyệt này. Nội dung đánh giá chỉ được gửi tới máy chủ cục bộ để phân tích.</p>
+      <button class="settings-theme" id="settings-theme" type="button">Đổi giao diện sáng / tối</button>
+    </section>
+    <footer>SentimentAI <span>•</span> Phân tích cảm xúc thông minh cho thương mại điện tử</footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
